@@ -44,10 +44,5 @@ object Plugin {
 dependencies {
     implementation(Plugin.kotlin)
     implementation(Plugin.androidGradle)
-    implementation(Plugin.navigationSafeArgs)
     implementation(Plugin.daggerHilt)
-    implementation(Plugin.spotless)
-    implementation(Plugin.smileId)
-    implementation(Plugin.googleService)
-    implementation(Plugin.googleCrashlytics)
 }
