@@ -1,6 +1,6 @@
 package com.efhem.creditscore.data
 
-import com.efhem.creditscore.data.model.CreditRemoteResponse
+import com.efhem.creditscore.data.models.CreditRemoteResponse
 import retrofit2.http.GET
 
 

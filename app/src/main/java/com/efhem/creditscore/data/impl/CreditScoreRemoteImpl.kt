@@ -2,8 +2,8 @@ package com.efhem.creditscore.data.impl
 
 import com.efhem.creditscore.data.ApiService
 import com.efhem.creditscore.data.mapper.CreditRemoteMapper
-import com.efhem.creditscore.data.model.CreditRemoteResponse
-import com.efhem.creditscore.domain.model.CreditScore
+import com.efhem.creditscore.data.models.CreditRemoteResponse
+import com.efhem.creditscore.domain.models.CreditScore
 import com.efhem.creditscore.domain.repository.CreditScoreRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.efhem.creditscore.data.model
+package com.efhem.creditscore.data.models
 
 data class CreditReportInfo (
     val score: Int,

@@ -1,5 +1,6 @@
 package com.efhem.creditscore.data
 
+import androidx.multidex.BuildConfig
 import com.efhem.creditscore.data.interceptor.HttpsInterceptor
 import com.squareup.moshi.Moshi
 import com.efhem.creditscore.data.interceptor.NoInternetInterceptor
@@ -14,9 +15,9 @@ object ApiServiceFactory {
 
     private const val BASE_URL: String = "https://android-interview.s3.eu-west-2.amazonaws.com/"
 
-    fun createApiService(isDebug: Boolean, moshi: Moshi): ApiService {
+    fun createApiService(moshi: Moshi): ApiService {
         val okHttpClient: OkHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor((isDebug))
+            makeLoggingInterceptor()
         )
         return makeApiService(okHttpClient, moshi)
     }
@@ -40,9 +41,9 @@ object ApiServiceFactory {
             .build()
     }
 
-    private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
+    private fun makeLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
-        logging.level = if (isDebug) {
+        logging.level = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
         } else {
             HttpLoggingInterceptor.Level.NONE

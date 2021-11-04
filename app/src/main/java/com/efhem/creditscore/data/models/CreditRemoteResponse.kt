@@ -1,4 +1,4 @@
-package com.efhem.creditscore.data.model
+package com.efhem.creditscore.data.models
 
 data class CreditRemoteResponse(
     val accountIDVStatus: String,
