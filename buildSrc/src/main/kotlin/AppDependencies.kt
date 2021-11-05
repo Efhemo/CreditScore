@@ -161,7 +161,7 @@ object Dependencies {
             const val truth: String = "1.0.1"
             const val robolectric: String = "4.4"
             const val archCoreTest: String = "1.1.1"
-            const val mockWebServer: String = "4.7.2"
+            const val mockWebServer: String = "4.9.2"
         }
 
         const val junit: String = "junit:junit:${Version.junit}"

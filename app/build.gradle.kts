@@ -4,6 +4,7 @@ import Dependencies.Network
 import Dependencies.Cache
 import Dependencies.View
 import Dependencies.Coroutines
+import Dependencies.Test
 
 plugins {
     androidApplication
@@ -81,6 +82,11 @@ dependencies {
         api(room)
         kapt(Cache.AnnotationProcessor.room)
     }
+
+    testImplementation(Test.junit)
+    testImplementation(Test.truth)
+    testImplementation(Test.coroutinesTest)
+    testImplementation(Test.mockWebServer)
 
 
     implementAll(DI.components)
