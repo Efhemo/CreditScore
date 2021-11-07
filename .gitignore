@@ -22,4 +22,4 @@ local.properties
 gradlew
 gradlew.bat
 .idea
-buildSrc/build/
+buildSrc/build
