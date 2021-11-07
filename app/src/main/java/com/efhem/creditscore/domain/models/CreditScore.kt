@@ -1,11 +1,15 @@
 package com.efhem.creditscore.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+
+@Parcelize
 data class CreditScore(
     val score: Int,
     val maxScoreValue: Int,
-    val minScoreValue: Int,
-    val hasEverDefaulted: Boolean,
-    val accountIDVStatus: String,
-    val personaType: String
-)
+    val minScoreValue: Int = 0,
+    val hasEverDefaulted: Boolean = false,
+    val accountIDVStatus: String = "PASS",
+    val personaType: String = "INEXPERIENCE"
+): Parcelable

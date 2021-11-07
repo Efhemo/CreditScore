@@ -8,8 +8,8 @@ const val ktLintVersion: String = "0.36.0"
 object Config {
     object Version {
         const val minSdkVersion: Int = 21
-        const val compileSdkVersion: Int = 30
-        const val targetSdkVersion: Int = 30
+        const val compileSdkVersion: Int = 31
+        const val targetSdkVersion: Int = 31
         const val buildToolsVersion: String = "30.0.2"
         const val versionName: String = "3.1"
         const val versionCode: Int = 9
@@ -81,27 +81,22 @@ object Dependencies {
     object DI : Libraries{
         object Version  {
             const val javaxInject: String = "1"
-            const val hiltAndroid: String = "2.33-beta"
+            const val hiltAndroid: String = "2.38.1"
             const val hiltViewModel: String = "1.0.0-alpha02"
-            const val hiltNavigation: String = "1.0.0-beta01"
         }
 
         object AnnotationProcessor {
             const val hiltAndroid: String =
                 "com.google.dagger:hilt-android-compiler:${Version.hiltAndroid}"
-            const val hiltCompiler: String = "androidx.hilt:hilt-compiler:${Version.hiltNavigation}"
-            const val daggerHiltCompiler: String = "com.google.dagger:hilt-compiler:${Version.hiltAndroid}"
         }
 
         const val javaxInject: String = "javax.inject:javax.inject:${Version.javaxInject}"
         private const val hiltAndroid: String = "com.google.dagger:hilt-android:${Version.hiltAndroid}"
         private const val hiltViewModel: String =
             "androidx.hilt:hilt-lifecycle-viewmodel:${Version.hiltViewModel}"
-        private const val hiltNavigation: String =
-            "androidx.hilt:hilt-navigation-fragment:${Version.hiltNavigation}"
 
         override val components: List<String>
-            get() = listOf(javaxInject, hiltAndroid, hiltViewModel, hiltNavigation)
+            get() = listOf(javaxInject, hiltAndroid, hiltViewModel)
     }
 
     object Coroutines : Libraries {
@@ -115,6 +110,33 @@ object Dependencies {
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
 
         override val components: List<String> = listOf(core, android)
+    }
+
+
+    object Compose : Libraries {
+        object Version {
+            const val activityCompose = "1.3.1"
+            const val composeVersion = "1.0.1"
+            const val composeViewModel = "2.4.0-rc01"
+            const val composeNavigation = "2.4.0-alpha10"
+            const val composeHiltNavigation = "1.0.0-alpha03"
+            const val composeSwipeRefresh = "1.0.7"
+
+        }
+
+
+        private const val composeActivity: String = "androidx.activity:activity-compose:${Version.activityCompose}"
+        private const val composeMaterial: String = "androidx.compose.material:material:${Version.composeVersion}"
+        private const val composeAnimation: String = "androidx.compose.animation:animation:${Version.composeVersion}"
+        private const val composeUITool: String = "androidx.compose.ui:ui-tooling:${Version.composeVersion}"
+        private const val composeNavigation: String = "androidx.navigation:navigation-compose:${Version.composeNavigation}"
+        private const val composeViewModel: String = "androidx.lifecycle:lifecycle-viewmodel-compose:${Version.composeViewModel}"
+        private const val composeSwipeRefresh: String = "com.github.aakarshrestha:compose-swipe-to-refresh:${Version.composeSwipeRefresh}"
+        private const val composeHiltNavigation: String = "androidx.hilt:hilt-navigation-compose:${Version.composeHiltNavigation}"
+
+
+        override val components: List<String> =
+            listOf(composeActivity, composeMaterial, composeAnimation, composeUITool, composeNavigation, composeViewModel, composeHiltNavigation )
     }
 
     object Network : Libraries {
@@ -162,6 +184,8 @@ object Dependencies {
             const val robolectric: String = "4.4"
             const val archCoreTest: String = "1.1.1"
             const val mockWebServer: String = "4.9.2"
+            const val composeTest: String = "1.0.1"
+
         }
 
         const val junit: String = "junit:junit:${Version.junit}"
@@ -180,10 +204,6 @@ object Dependencies {
         const val robolectric: String = "org.robolectric:robolectric:${Version.robolectric}"
         const val mockWebServer: String =
             "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer}"
+        const val composeUITests: String = "androidx.compose.ui:ui-test-junit4:${Version.composeTest}"
     }
-}
-
-object ProjectLib {
-    const val app: String = ":app"
-    const val testUtils: String = ":libraries:testUtils"
 }

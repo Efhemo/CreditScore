@@ -5,6 +5,7 @@ import Dependencies.Cache
 import Dependencies.View
 import Dependencies.Coroutines
 import Dependencies.Test
+import Dependencies.Compose
 
 plugins {
     androidApplication
@@ -19,7 +20,7 @@ android {
         applicationId = Config.Android.applicationId
         minSdkVersion(Config.Version.minSdkVersion)
         compileSdkVersion(Config.Version.compileSdkVersion)
-        buildToolsVersion(Config.Version.buildToolsVersion)
+        //buildToolsVersion(Config.Version.buildToolsVersion)
         targetSdkVersion(Config.Version.targetSdkVersion)
         versionCode = Config.Version.versionCode
         versionName = Config.Version.versionName
@@ -34,6 +35,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.1"
     }
 
     buildTypes {
@@ -71,11 +80,15 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
+    //implementation ("com.github.aakarshrestha:compose-swipe-to-refresh:1.0.7")
+    //implementation ("com.google.accompanist:accompanist-swiperefresh:0.20.1")
 
     implementAll(Coroutines.components)
 
     implementAll(View.components)
     implementAll(AndroidX.components)
+    implementAll(Compose.components)
+
 
     implementAll(Network.components)
     Cache.run {
@@ -87,10 +100,9 @@ dependencies {
     testImplementation(Test.truth)
     testImplementation(Test.coroutinesTest)
     testImplementation(Test.mockWebServer)
+    testImplementation(Test.composeUITests)
 
 
     implementAll(DI.components)
     kapt(DI.AnnotationProcessor.hiltAndroid)
-    kapt(DI.AnnotationProcessor.hiltCompiler)
-    kapt(DI.AnnotationProcessor.daggerHiltCompiler)
 }

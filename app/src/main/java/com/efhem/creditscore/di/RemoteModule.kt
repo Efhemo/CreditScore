@@ -4,6 +4,7 @@ import com.efhem.creditscore.data.ApiService
 import com.efhem.creditscore.data.ApiServiceFactory
 import com.efhem.creditscore.data.impl.CreditScoreRemoteImpl
 import com.efhem.creditscore.domain.repository.CreditScoreRepository
+import com.efhem.creditscore.utils.JSONObjectAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
@@ -25,7 +26,7 @@ object RemoteModule {
         ApiServiceFactory.createApiService(moshi)
 
     @[Provides Singleton]
-    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(JSONObjectAdapter()).build()
 
     @[Provides Singleton]
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
