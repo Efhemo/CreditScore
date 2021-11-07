@@ -83,20 +83,25 @@ object Dependencies {
             const val javaxInject: String = "1"
             const val hiltAndroid: String = "2.38.1"
             const val hiltViewModel: String = "1.0.0-alpha02"
+            const val hiltNavigation: String = "1.0.0-beta01"
         }
 
         object AnnotationProcessor {
             const val hiltAndroid: String =
                 "com.google.dagger:hilt-android-compiler:${Version.hiltAndroid}"
+            const val hiltCompiler: String = "androidx.hilt:hilt-compiler:${Version.hiltNavigation}"
+            const val daggerHiltCompiler: String = "com.google.dagger:hilt-compiler:${Version.hiltAndroid}"
         }
 
         const val javaxInject: String = "javax.inject:javax.inject:${Version.javaxInject}"
         private const val hiltAndroid: String = "com.google.dagger:hilt-android:${Version.hiltAndroid}"
         private const val hiltViewModel: String =
             "androidx.hilt:hilt-lifecycle-viewmodel:${Version.hiltViewModel}"
+        private const val hiltNavigation: String =
+            "androidx.hilt:hilt-navigation-fragment:${Version.hiltNavigation}"
 
         override val components: List<String>
-            get() = listOf(javaxInject, hiltAndroid, hiltViewModel)
+            get() = listOf(javaxInject, hiltAndroid, hiltViewModel, hiltNavigation)
     }
 
     object Coroutines : Libraries {
