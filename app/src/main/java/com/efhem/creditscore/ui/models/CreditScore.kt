@@ -1,4 +1,4 @@
-package com.efhem.creditscore.domain.models
+package com.efhem.creditscore.ui.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

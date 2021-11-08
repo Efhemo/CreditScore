@@ -1,5 +1,6 @@
 package com.efhem.creditscore.data.interceptor
 
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -10,10 +11,13 @@ object HttpsInterceptor : Interceptor {
         val request: Request = chain.request()
         val requestBuilder: Request.Builder = request.newBuilder()
 
-        var stringUrl = request.url.toString()
-        stringUrl = stringUrl.replace("%2C", ",")
-        requestBuilder.url(stringUrl)
-
+        if (!request.url.isHttps) {
+            val newUrl: HttpUrl = request.url.newBuilder()
+                .scheme("https")
+                .host(request.url.host)
+                .build()
+            requestBuilder.url(newUrl)
+        }
         val newRequest: Request = requestBuilder.build()
         val response: Response?
 

@@ -2,16 +2,16 @@ package com.efhem.creditscore.data.mapper
 
 import com.efhem.creditscore.data.mapper.base.RemoteModelMapper
 import com.efhem.creditscore.data.models.CreditRemoteResponse
-import com.efhem.creditscore.domain.models.CreditScore
+import com.efhem.creditscore.domain.models.CreditScoreEntity
 import javax.inject.Inject
 
 class CreditRemoteMapper @Inject constructor() :
-    RemoteModelMapper<CreditRemoteResponse, CreditScore> {
+    RemoteModelMapper<CreditRemoteResponse, CreditScoreEntity> {
 
 
-    override fun mapFromModel(model: CreditRemoteResponse): CreditScore {
+    override fun mapFromModel(model: CreditRemoteResponse): CreditScoreEntity {
         return with(model) {
-            CreditScore(
+            CreditScoreEntity(
                 creditReportInfo.score,
                 creditReportInfo.maxScoreValue,
                 creditReportInfo.minScoreValue,

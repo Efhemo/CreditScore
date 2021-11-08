@@ -1,9 +1,9 @@
 package com.efhem.creditscore.domain.repository
 
-import com.efhem.creditscore.domain.models.CreditScore
+import com.efhem.creditscore.domain.models.CreditScoreEntity
 
 interface CreditScoreRepository {
 
-    suspend fun getCreditScore(): CreditScore
+    suspend fun getCreditScore(): CreditScoreEntity
 
 }

@@ -9,6 +9,8 @@ import com.efhem.creditscore.utils.trowException
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -20,6 +22,7 @@ class CreditScoreRemoteImplTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var creditScoreRepository: CreditScoreRepository
     private val creditRemoteMapper: CreditRemoteMapper = CreditRemoteMapper()
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     @Before
     fun setUp() {
@@ -27,7 +30,7 @@ class CreditScoreRemoteImplTest {
         mockWebServer.dispatcher = RequestDispatcher()
         mockWebServer.start()
         creditScoreRepository =
-            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper)
+            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper, ioDispatcher)
     }
 
     @After

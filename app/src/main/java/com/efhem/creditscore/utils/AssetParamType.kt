@@ -3,9 +3,7 @@ package com.efhem.creditscore.utils
 import android.os.Bundle
 import androidx.navigation.NavType
 import com.efhem.creditscore.di.RemoteModule
-import com.efhem.creditscore.domain.models.CreditScore
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.efhem.creditscore.ui.models.CreditScore
 import java.lang.RuntimeException
 
 class AssetParamType : NavType<CreditScore>(isNullableAllowed = true) {

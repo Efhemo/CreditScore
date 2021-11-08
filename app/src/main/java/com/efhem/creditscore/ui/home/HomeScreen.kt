@@ -1,7 +1,6 @@
 package com.efhem.creditscore.ui.home
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.efhem.creditscore.R
 import com.efhem.creditscore.di.RemoteModule
-import com.efhem.creditscore.domain.models.CreditScore
+import com.efhem.creditscore.ui.models.CreditScore
 import com.efhem.creditscore.ui.components.DonutView
 import com.efhem.creditscore.ui.models.ViewState
 import kotlinx.coroutines.launch
@@ -52,12 +51,10 @@ fun HomeScreen(
             }
         }
         is ViewState.Success -> {
-            println("app Success")
             isLoading = false
             creditScore = (uiState as ViewState.Success).creditScore
         }
         is ViewState.Loading -> {
-            println("app Loading")
             isLoading = true
             scope.launch {
                 snackbarHostState.showSnackbar("Loading")

@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.efhem.creditscore.domain.models.CreditScore
+import com.efhem.creditscore.ui.models.CreditScore
 import com.efhem.creditscore.ui.details.DetailScreen
 import com.efhem.creditscore.ui.home.HomeScreen
 import com.efhem.creditscore.utils.AssetParamType
