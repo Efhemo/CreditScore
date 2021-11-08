@@ -1,18 +1,20 @@
 package com.efhem.creditscore.ui.home
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.efhem.creditscore.R
@@ -38,46 +40,112 @@ fun HomeScreen(
         mutableStateOf<CreditScore?>(null)
     }
 
-    when(uiState){
-        is ViewState.Error -> scope.launch {
-            snackbarHostState.showSnackbar((uiState as ViewState.Error).throwable.message ?: "")
+    var isLoading by remember {
+        mutableStateOf(false)
+    }
+
+    when (uiState) {
+        is ViewState.Error -> {
+            isLoading = false
+            scope.launch {
+                snackbarHostState.showSnackbar((uiState as ViewState.Error).throwable.message ?: "")
+            }
         }
         is ViewState.Success -> {
+            println("app Success")
+            isLoading = false
             creditScore = (uiState as ViewState.Success).creditScore
         }
         is ViewState.Loading -> {
-            println("Loading")
+            println("app Loading")
+            isLoading = true
+            scope.launch {
+                snackbarHostState.showSnackbar("Loading")
+            }
         }
     }
 
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colors.background)
-    ) {
-        Image(
-            painter = painterResource(R.drawable.cbimage),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-
-        DonutView(
-            indicatorValue = creditScore?.score ?: 0,
-            maxIndicatorValue = creditScore?.maxScoreValue ?: 100,
-            onClick = {
-                creditScore?.let {
-                    val json = RemoteModule.provideMoshi().adapter(CreditScore::class.java).toJson(it)
-                    navController.navigate("details/$json")
-                }
+    Scaffold(
+        topBar = {
+            CustomAppBar(hideButton = isLoading) {
+                homeViewModel.loadCreditScore()
             }
-        )
+        }
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colors.background)
+        ) {
+            Image(
+                painter = painterResource(R.drawable.cbimage),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            DonutView(
+                indicatorValue = creditScore?.score ?: 0,
+                maxIndicatorValue = creditScore?.maxScoreValue ?: 100,
+                onClick = {
+                    creditScore?.let {
+                        val json =
+                            RemoteModule.provideMoshi().adapter(CreditScore::class.java).toJson(it)
+                        navController.navigate("details/$json")
+                    }
+                }
+            )
+
+        }
+
+        SnackbarHost(hostState = snackbarHostState)
 
     }
 
-    SnackbarHost(hostState = snackbarHostState)
+
+}
+
+@Composable
+fun CustomAppBar(hideButton: Boolean = false, onClickRefresh: () -> Unit) {
+
+    Surface(color = MaterialTheme.colors.primarySurface) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .padding(all = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Credit Score",
+                    style = MaterialTheme.typography.subtitle2
+                )
+
+                if(!hideButton){
+                    IconButton(
+                        onClick = onClickRefresh,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Refresh,
+                            contentDescription = "Refresh Button"
+                        )
+                    }
+                }
+            }
+
+        }
+    }
+}
 
 
+@Preview
+@Composable
+fun HomeScreenPrev() {
+    CustomAppBar {}
 }
