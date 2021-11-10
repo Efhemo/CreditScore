@@ -1,7 +1,6 @@
 import Dependencies.AndroidX
 import Dependencies.DI
 import Dependencies.Network
-import Dependencies.Cache
 import Dependencies.View
 import Dependencies.Coroutines
 import Dependencies.Test
@@ -18,10 +17,9 @@ plugins {
 android {
     defaultConfig {
         applicationId = Config.Android.applicationId
-        minSdkVersion(Config.Version.minSdkVersion)
-        compileSdkVersion(Config.Version.compileSdkVersion)
-        //buildToolsVersion(Config.Version.buildToolsVersion)
-        targetSdkVersion(Config.Version.targetSdkVersion)
+        minSdk = Config.Version.minSdkVersion
+        compileSdk = Config.Version.compileSdkVersion
+        targetSdk = Config.Version.targetSdkVersion
         versionCode = Config.Version.versionCode
         versionName = Config.Version.versionName
         multiDexEnabled = Config.isMultiDexEnabled
@@ -79,9 +77,6 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
-    //implementation ("com.github.aakarshrestha:compose-swipe-to-refresh:1.0.7")
-    //implementation ("com.google.accompanist:accompanist-swiperefresh:0.20.1")
 
     implementAll(Coroutines.components)
 
@@ -91,18 +86,17 @@ dependencies {
 
 
     implementAll(Network.components)
-    Cache.run {
-        api(room)
-        kapt(Cache.AnnotationProcessor.room)
-    }
 
     testImplementation(Test.junit)
     testImplementation(Test.truth)
     testImplementation(Test.coroutinesTest)
     testImplementation(Test.mockWebServer)
-    testImplementation(Test.composeUITests)
+
 
 
     implementAll(DI.components)
     kapt(DI.AnnotationProcessor.hiltAndroid)
+
+    androidTestImplementation(Test.composeUITests)
+    debugImplementation(Test.composeUIManifestTests)
 }

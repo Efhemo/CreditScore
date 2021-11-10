@@ -21,12 +21,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.efhem.creditscore.R
 import com.efhem.creditscore.ui.theme.CreditScoreTheme
 import com.efhem.creditscore.ui.theme.Orange
 import com.efhem.creditscore.ui.theme.OrangeYellow2
@@ -89,6 +92,7 @@ fun DonutView(
     Column(
         modifier = Modifier
             .size(canvasSize)
+            .testTag("DonutViewTag")
             .clickable {
                 if (onClick != null) {
                     onClick()
@@ -187,7 +191,7 @@ fun EmbeddedElement(
 ) {
 
     Text(
-        text = "Your credit score is",
+        text = stringResource(R.string.credit_score_is),
         color = textColor,
         fontSize = smallTextFontSize,
         textAlign = TextAlign.Center,
@@ -202,7 +206,7 @@ fun EmbeddedElement(
     )
 
     Text(
-        text = "out of $maxValue",
+        text = stringResource(R.string.out_of, maxValue),
         color = textColor,
         fontSize = smallTextFontSize,
         textAlign = TextAlign.Center,

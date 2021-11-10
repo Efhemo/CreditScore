@@ -2,30 +2,32 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories.applyDefault()
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
-    }
 }
 
 allprojects {
     repositories.applyDefault()
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion(kotlinVersion)
+            }
+        }
     }
 }
 
 subprojects {
     tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions.freeCompilerArgs +=
-            "-Xuse-experimental=" +
+        with(kotlinOptions) {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            languageVersion = "1.5"
+            apiVersion = "1.5"
+            freeCompilerArgs += "-Xuse-experimental=" +
                     "kotlin.Experimental," +
                     "kotlinx.coroutines.ExperimentalCoroutinesApi," +
                     "kotlinx.coroutines.InternalCoroutinesApi," +
                     "kotlinx.coroutines.ObsoleteCoroutinesApi," +
                     "kotlinx.coroutines.FlowPreview"
+            freeCompilerArgs += "-Xopt-in=kotlin.ExperimentalStdlibApi"
+        }
     }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
 }

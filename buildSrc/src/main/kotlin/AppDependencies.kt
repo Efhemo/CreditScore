@@ -1,15 +1,16 @@
-import Dependencies.View.Version.fragment
 
 const val kotlinAndroid: String = "android"
 const val kotlinAndroidExtension: String = "android.extensions"
 const val kotlinKapt: String = "kapt"
 const val ktLintVersion: String = "0.36.0"
+const val kotlinVersion = "1.5.21"
+
 
 object Config {
     object Version {
         const val minSdkVersion: Int = 21
         const val compileSdkVersion: Int = 31
-        const val targetSdkVersion: Int = 31
+        const val targetSdkVersion: Int = 30
         const val buildToolsVersion: String = "30.0.2"
         const val versionName: String = "3.1"
         const val versionCode: Int = 9
@@ -89,8 +90,6 @@ object Dependencies {
         object AnnotationProcessor {
             const val hiltAndroid: String =
                 "com.google.dagger:hilt-android-compiler:${Version.hiltAndroid}"
-            const val hiltCompiler: String = "androidx.hilt:hilt-compiler:${Version.hiltNavigation}"
-            const val daggerHiltCompiler: String = "com.google.dagger:hilt-compiler:${Version.hiltAndroid}"
         }
 
         const val javaxInject: String = "javax.inject:javax.inject:${Version.javaxInject}"
@@ -125,7 +124,6 @@ object Dependencies {
             const val composeViewModel = "2.4.0-rc01"
             const val composeNavigation = "2.4.0-alpha10"
             const val composeHiltNavigation = "1.0.0-alpha03"
-            const val composeSwipeRefresh = "1.0.7"
 
         }
 
@@ -136,7 +134,6 @@ object Dependencies {
         private const val composeUITool: String = "androidx.compose.ui:ui-tooling:${Version.composeVersion}"
         private const val composeNavigation: String = "androidx.navigation:navigation-compose:${Version.composeNavigation}"
         private const val composeViewModel: String = "androidx.lifecycle:lifecycle-viewmodel-compose:${Version.composeViewModel}"
-        private const val composeSwipeRefresh: String = "com.github.aakarshrestha:compose-swipe-to-refresh:${Version.composeSwipeRefresh}"
         private const val composeHiltNavigation: String = "androidx.hilt:hilt-navigation-compose:${Version.composeHiltNavigation}"
 
 
@@ -165,28 +162,13 @@ object Dependencies {
         )
     }
 
-    object Cache {
-        object Version {
-            const val room: String = "2.4.0-alpha01"
-        }
-
-        object AnnotationProcessor {
-            const val room: String = "androidx.room:room-compiler:${Version.room}"
-        }
-
-        const val room: String = "androidx.room:room-ktx:${Version.room}"
-    }
-
     object Test {
         object Version {
             const val junit: String = "4.13"
             const val runner: String = "1.3.0"
             const val rules: String = "1.3.0"
             const val testExt: String = "1.1.2"
-            const val testCore: String = "1.3.0"
-            const val espresso: String = "3.3.0"
             const val truth: String = "1.0.1"
-            const val robolectric: String = "4.4"
             const val archCoreTest: String = "1.1.1"
             const val mockWebServer: String = "4.9.2"
             const val composeTest: String = "1.0.1"
@@ -196,19 +178,14 @@ object Dependencies {
         const val junit: String = "junit:junit:${Version.junit}"
         const val runner: String = "androidx.test:runner:${Version.runner}"
         const val rules: String = "androidx.test:rules:${Version.rules}"
-        const val fragmentTesting: String = "androidx.fragment:fragment-testing:$fragment"
         const val androidXTest: String = "androidx.test.ext:junit:${Version.testExt}"
-        const val androidXTestCore: String = "androidx.test:core:${Version.testCore}"
-        const val espresso: String = "androidx.test.espresso:espresso-core:${Version.espresso}"
-        const val espressoContrib: String =
-            "androidx.test.espresso:espresso-contrib:${Version.espresso}"
         const val archCoreTest: String = "android.arch.core:core-testing:${Version.archCoreTest}"
         const val truth: String = "com.google.truth:truth:${Version.truth}"
         const val coroutinesTest: String =
             "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Coroutines.Version.coroutines}"
-        const val robolectric: String = "org.robolectric:robolectric:${Version.robolectric}"
         const val mockWebServer: String =
             "com.squareup.okhttp3:mockwebserver:${Version.mockWebServer}"
         const val composeUITests: String = "androidx.compose.ui:ui-test-junit4:${Version.composeTest}"
+        const val composeUIManifestTests: String = "androidx.compose.ui:ui-test-manifest:${Version.composeTest}"
     }
 }

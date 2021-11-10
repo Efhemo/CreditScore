@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -120,7 +121,7 @@ fun CustomAppBar(hideButton: Boolean = false, onClickRefresh: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Credit Score",
+                    text = stringResource(R.string.app_name),
                     style = MaterialTheme.typography.subtitle2
                 )
 
@@ -130,7 +131,7 @@ fun CustomAppBar(hideButton: Boolean = false, onClickRefresh: () -> Unit) {
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Refresh,
-                            contentDescription = "Refresh Button"
+                            contentDescription = stringResource(R.string.button_descriptive)
                         )
                     }
                 }

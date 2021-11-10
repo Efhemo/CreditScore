@@ -29,7 +29,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `observe loadCreditScore`() = runBlockingTest {
+    fun `observe loadCreditScore for success`() = runBlockingTest {
 
         val results = mutableListOf<ViewState>()
         val job = launch {
