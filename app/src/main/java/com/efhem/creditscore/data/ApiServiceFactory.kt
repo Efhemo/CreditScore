@@ -15,9 +15,9 @@ object ApiServiceFactory {
 
     private const val BASE_URL: String = "https://android-interview.s3.eu-west-2.amazonaws.com/"
 
-    fun createApiService(moshi: Moshi): ApiService {
+    fun createApiService(moshi: Moshi, isDebug: Boolean): ApiService {
         val okHttpClient: OkHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor()
+            makeLoggingInterceptor(isDebug)
         )
         return makeApiService(okHttpClient, moshi)
     }
@@ -41,9 +41,9 @@ object ApiServiceFactory {
             .build()
     }
 
-    private fun makeLoggingInterceptor(): HttpLoggingInterceptor {
+    private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
-        logging.level = if (BuildConfig.DEBUG) {
+        logging.level = if (isDebug) {
             HttpLoggingInterceptor.Level.BODY
         } else {
             HttpLoggingInterceptor.Level.NONE
