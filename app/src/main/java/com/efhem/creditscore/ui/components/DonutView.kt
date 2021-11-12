@@ -71,22 +71,22 @@ fun DonutView(
 
     val sweepAngle by animateFloatAsState(
         targetValue = (3.6 * percentage).toFloat(),
-        animationSpec = tween(1000)
+        animationSpec = tween(5000)
     )
 
     val receivedValue by animateIntAsState(
         targetValue = allowedIndicatorValue,
-        animationSpec = tween(1000)
+        animationSpec = tween(5000)
     )
 
     val animatedBigTextColor by animateColorAsState(
         targetValue = if (allowedIndicatorValue == 0) textColor else bigTextColor,
-        animationSpec = tween(1000)
+        animationSpec = tween(5000)
     )
 
     val animatedTextColor by animateColorAsState(
         targetValue = if (allowedIndicatorValue == 0) textColor else boldTextColor,
-        animationSpec = tween(1000)
+        animationSpec = tween(5000)
     )
 
     Column(

@@ -124,6 +124,7 @@ object Dependencies {
             const val composeViewModel = "2.4.0-rc01"
             const val composeNavigation = "2.4.0-alpha10"
             const val composeHiltNavigation = "1.0.0-alpha03"
+            const val accompanistSwipeRefresh = "0.21.2-beta"
 
         }
 
@@ -135,10 +136,12 @@ object Dependencies {
         private const val composeNavigation: String = "androidx.navigation:navigation-compose:${Version.composeNavigation}"
         private const val composeViewModel: String = "androidx.lifecycle:lifecycle-viewmodel-compose:${Version.composeViewModel}"
         private const val composeHiltNavigation: String = "androidx.hilt:hilt-navigation-compose:${Version.composeHiltNavigation}"
+        private const val accompanistSwipeRefresh: String = "com.google.accompanist:accompanist-swiperefresh:${Version.accompanistSwipeRefresh}"
 
 
         override val components: List<String> =
-            listOf(composeActivity, composeMaterial, composeAnimation, composeUITool, composeNavigation, composeViewModel, composeHiltNavigation )
+            listOf(composeActivity, composeMaterial, composeAnimation, composeUITool,
+                composeNavigation, composeViewModel, composeHiltNavigation, accompanistSwipeRefresh )
     }
 
     object Network : Libraries {
