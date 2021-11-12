@@ -1,7 +1,8 @@
 package com.efhem.creditscore.ui.home
 
+import com.efhem.creditscore.domain.executor.TestPostExecutionThread
 import com.efhem.creditscore.domain.mapper.CreditScoreEntityMapper
-import com.efhem.creditscore.domain.repository.CreditScoreRepository
+import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
 import com.efhem.creditscore.fakes.FakeCreditScoreRepository
 import com.efhem.creditscore.ui.models.ViewState
 import com.efhem.creditscore.utils.MainCoroutineRule
@@ -16,16 +17,16 @@ import org.junit.Test
 class HomeViewModelTest {
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var creditScoreRepository: CreditScoreRepository
     private val creditRemoteMapper: CreditScoreEntityMapper = CreditScoreEntityMapper()
+
+    private val getCreditScoreUseCase = GetCreditScoreUseCase(FakeCreditScoreRepository(), TestPostExecutionThread())
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
     @Before
     fun setUp() {
-        creditScoreRepository = FakeCreditScoreRepository()
-        homeViewModel = HomeViewModel(creditScoreRepository, creditRemoteMapper)
+        homeViewModel = HomeViewModel(getCreditScoreUseCase, creditRemoteMapper)
     }
 
     @Test

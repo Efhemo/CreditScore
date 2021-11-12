@@ -4,20 +4,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.efhem.creditscore.domain.mapper.CreditScoreEntityMapper
 import com.efhem.creditscore.ui.models.CreditScore
-import com.efhem.creditscore.domain.repository.CreditScoreRepository
+import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
 import com.efhem.creditscore.ui.models.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val creditScoreRepository: CreditScoreRepository,
+    private val getCreditScoreUseCase: GetCreditScoreUseCase,
     private val mapper: CreditScoreEntityMapper
 ) : ViewModel() {
 
@@ -30,15 +27,13 @@ class HomeViewModel @Inject constructor(
     }
 
     fun loadCreditScore() {
-        _uiState.value = ViewState.Loading
         viewModelScope.launch {
-            kotlin.runCatching {
-                creditScoreRepository.getCreditScore()
-            }.onSuccess {
-                _uiState.value = ViewState.Success(mapper.mapFromModel(it))
-            }.onFailure {
-                _uiState.value = ViewState.Error(it)
-            }
+            getCreditScoreUseCase()
+                .onStart { _uiState.value = ViewState.Loading }
+                .catch { _uiState.value = ViewState.Error(it) }
+                .collect {
+                    _uiState.value = ViewState.Success(mapper.mapFromModel(it))
+                }
         }
     }
 

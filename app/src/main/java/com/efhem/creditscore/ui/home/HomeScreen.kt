@@ -34,7 +34,7 @@ fun HomeScreen(
     val uiState by homeViewModel.uiState.collectAsState()
 
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarHostState = SnackbarHostState()
 
     var creditScore by remember {
         mutableStateOf<CreditScore?>(null)

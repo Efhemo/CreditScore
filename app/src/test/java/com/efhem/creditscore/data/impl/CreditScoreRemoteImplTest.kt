@@ -1,6 +1,8 @@
 package com.efhem.creditscore.data.impl
 
 import com.efhem.creditscore.data.mapper.CreditRemoteMapper
+import com.efhem.creditscore.domain.executor.PostExecutionThread
+import com.efhem.creditscore.domain.executor.TestPostExecutionThread
 import com.efhem.creditscore.domain.repository.CreditScoreRepository
 import com.efhem.creditscore.utils.REQUEST_PATH
 import com.efhem.creditscore.utils.RequestDispatcher
@@ -22,7 +24,7 @@ class CreditScoreRemoteImplTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var creditScoreRepository: CreditScoreRepository
     private val creditRemoteMapper: CreditRemoteMapper = CreditRemoteMapper()
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val postExecutionThread =  TestPostExecutionThread()
 
     @Before
     fun setUp() {
@@ -30,7 +32,7 @@ class CreditScoreRemoteImplTest {
         mockWebServer.dispatcher = RequestDispatcher()
         mockWebServer.start()
         creditScoreRepository =
-            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper, ioDispatcher)
+            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper, postExecutionThread)
     }
 
     @After
@@ -54,7 +56,6 @@ class CreditScoreRemoteImplTest {
         assertThat(creditScore.hasEverDefaulted).isFalse()
         assertThat(creditScore.maxScoreValue).isGreaterThan(0)
         assertThat(creditScore.minScoreValue).isEqualTo(0)
-
     }
 
     @Test
@@ -68,16 +69,6 @@ class CreditScoreRemoteImplTest {
         creditScoreRepository.getCreditScore()
         assertThat("GET $REQUEST_PATH HTTP/1.1").isEqualTo(mockWebServer.takeRequest().requestLine)
     }
-
-//    @Test
-//    fun `check that calling empty path throws Error`() = runBlocking {
-//
-//        val throwable: UnknownHostException = trowException {
-//            suspend { creditScoreRepository.getCreditScore() }
-//        }
-//
-//        assertThat(throwable.message).isEqualTo("Problem, Check your internet connection")
-//    }
 
 
 }
