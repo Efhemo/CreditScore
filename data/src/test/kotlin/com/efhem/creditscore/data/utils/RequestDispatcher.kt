@@ -1,4 +1,4 @@
-package com.efhem.creditscore.utils
+package com.efhem.creditscore.data.utils
 
 
 import okhttp3.mockwebserver.Dispatcher

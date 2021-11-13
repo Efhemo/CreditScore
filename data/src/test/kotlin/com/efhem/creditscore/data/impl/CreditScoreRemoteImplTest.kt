@@ -1,22 +1,16 @@
 package com.efhem.creditscore.data.impl
 
 import com.efhem.creditscore.data.mapper.CreditRemoteMapper
-import com.efhem.creditscore.domain.executor.PostExecutionThread
-import com.efhem.creditscore.domain.executor.TestPostExecutionThread
+import com.efhem.creditscore.data.utils.REQUEST_PATH
+import com.efhem.creditscore.data.utils.RequestDispatcher
+import com.efhem.creditscore.data.utils.makeTestApiService
 import com.efhem.creditscore.domain.repository.CreditScoreRepository
-import com.efhem.creditscore.utils.REQUEST_PATH
-import com.efhem.creditscore.utils.RequestDispatcher
-import com.efhem.creditscore.utils.makeTestApiService
-import com.efhem.creditscore.utils.trowException
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import java.net.UnknownHostException
 
 
 class CreditScoreRemoteImplTest {
@@ -24,7 +18,6 @@ class CreditScoreRemoteImplTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var creditScoreRepository: CreditScoreRepository
     private val creditRemoteMapper: CreditRemoteMapper = CreditRemoteMapper()
-    private val postExecutionThread =  TestPostExecutionThread()
 
     @Before
     fun setUp() {
@@ -32,7 +25,7 @@ class CreditScoreRemoteImplTest {
         mockWebServer.dispatcher = RequestDispatcher()
         mockWebServer.start()
         creditScoreRepository =
-            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper, postExecutionThread)
+            CreditScoreRemoteImpl(makeTestApiService(mockWebServer), creditRemoteMapper)
     }
 
     @After

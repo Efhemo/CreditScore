@@ -1,8 +1,8 @@
 package com.efhem.creditscore.ui.home
 
-import com.efhem.creditscore.domain.executor.TestPostExecutionThread
-import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
+import com.efhem.creditscore.executor.TestPostExecutionThread
 import com.efhem.creditscore.fakes.FakeCreditScoreRepository
+import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
 import com.efhem.creditscore.ui.mappers.CreditScoreMapper
 import com.efhem.creditscore.ui.models.ViewState
 import com.efhem.creditscore.utils.MainCoroutineRule

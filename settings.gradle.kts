@@ -1,2 +1,2 @@
 rootProject.name = "CreditScore"
-include (":app", ":domain")
+include (":app", ":domain", ":data")

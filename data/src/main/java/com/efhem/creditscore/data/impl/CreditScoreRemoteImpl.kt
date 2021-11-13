@@ -11,12 +11,11 @@ import javax.inject.Inject
 
 class CreditScoreRemoteImpl @Inject constructor(
     private val apiService: ApiService,
-    private val creditRemoteMapper: CreditRemoteMapper,
-    private val postExecutionThread: PostExecutionThread,
+    private val creditRemoteMapper: CreditRemoteMapper
 ) : CreditScoreRepository {
 
     override suspend fun getCreditScore(): CreditScoreEntity {
-        val subjects: CreditRemoteResponse = withContext(postExecutionThread.io){ apiService.getData()}
+        val subjects: CreditRemoteResponse = apiService.getData()
         return creditRemoteMapper.mapFromModel(subjects)
     }
 

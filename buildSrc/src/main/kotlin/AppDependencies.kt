@@ -151,6 +151,10 @@ object Dependencies {
             const val moshi: String = "1.9.2"
         }
 
+        object AnnotationProcessor {
+            const val moshi: String = "com.squareup.moshi:moshi-kotlin-codegen:${Version.moshi}"
+        }
+
         private const val okhttp: String = "com.squareup.okhttp3:okhttp:${Version.okhttp}"
         private const val loggingInterceptor: String =
             "com.squareup.okhttp3:logging-interceptor:${Version.okhttp}"
@@ -195,4 +199,5 @@ object Dependencies {
 
 object ProjectLib {
     const val domain: String = ":domain"
+    const val data: String = ":data"
 }

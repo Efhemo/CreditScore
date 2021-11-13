@@ -5,6 +5,7 @@ import Dependencies.View
 import Dependencies.Coroutines
 import Dependencies.Test
 import Dependencies.Compose
+import ProjectLib.data
 import ProjectLib.domain
 
 plugins {
@@ -80,19 +81,18 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
 
     implementation(project(domain))
+    implementation(project(data))
 
     implementAll(Coroutines.components)
     implementAll(View.components)
     implementAll(AndroidX.components)
     implementAll(Compose.components)
+    implementation(Network.moshi)
 
-
-    implementAll(Network.components)
 
     testImplementation(Test.junit)
     testImplementation(Test.truth)
     testImplementation(Test.coroutinesTest)
-    testImplementation(Test.mockWebServer)
 
 
 

@@ -1,6 +1,5 @@
 package com.efhem.creditscore.data
 
-import androidx.multidex.BuildConfig
 import com.efhem.creditscore.data.interceptor.HttpsInterceptor
 import com.squareup.moshi.Moshi
 import com.efhem.creditscore.data.interceptor.NoInternetInterceptor
