@@ -1,10 +1,10 @@
-package com.efhem.creditscore.domain.mapper
+package com.efhem.creditscore.ui.mappers
 
 import com.efhem.creditscore.domain.models.CreditScoreEntity
 import com.efhem.creditscore.ui.models.CreditScore
 import javax.inject.Inject
 
-class CreditScoreEntityMapper @Inject constructor() {
+class CreditScoreMapper @Inject constructor() {
 
     fun mapFromModel(model: CreditScoreEntity): CreditScore {
         return with(model) {

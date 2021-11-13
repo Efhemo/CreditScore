@@ -1,7 +1,7 @@
 package com.efhem.creditscore.domain.usecase
 
 import com.efhem.creditscore.domain.executor.TestPostExecutionThread
-import com.efhem.creditscore.fakes.FakeCreditScoreRepository
+import com.efhem.creditscore.domain.repository.FakeCreditScoreRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest

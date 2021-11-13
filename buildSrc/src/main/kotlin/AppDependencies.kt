@@ -192,3 +192,7 @@ object Dependencies {
         const val composeUIManifestTests: String = "androidx.compose.ui:ui-test-manifest:${Version.composeTest}"
     }
 }
+
+object ProjectLib {
+    const val domain: String = ":domain"
+}
