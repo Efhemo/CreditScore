@@ -2,9 +2,9 @@ package com.efhem.creditscore.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.efhem.creditscore.domain.mapper.CreditScoreEntityMapper
 import com.efhem.creditscore.ui.models.CreditScore
 import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
+import com.efhem.creditscore.ui.mappers.CreditScoreMapper
 import com.efhem.creditscore.ui.models.ViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getCreditScoreUseCase: GetCreditScoreUseCase,
-    private val mapper: CreditScoreEntityMapper
+    private val mapper: CreditScoreMapper
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<ViewState>(ViewState.Success(CreditScore(0, 100)))

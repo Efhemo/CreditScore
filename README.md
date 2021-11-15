@@ -6,14 +6,14 @@ The app pulls credit score information content from ClearScore API. It is built 
 ## Architecture
 
 The application follows clean architecture because of the benefits it brings to software which includes scalability, maintainability and testability.
-It enforces separation of concerns and dependency inversion, where higher and lower level layers all depend on abstractions. In the project, the layers are separated into different package namely:
+It enforces separation of concerns and dependency inversion, where higher and lower level layers all depend on abstractions. In the project, the layers are separated into different gradle modules namely:
 
-- ui (as feature package)
+- ui
 - Domain
 - Remote (data-layer)
 
 
-Although, Taking advantage of gradle module representing the layers instead of packages would have enforces a robust separation of concerns. These packages are full of kotlin codes except ui packages. The reason being that the low level layers need to be independent of the Android framework. One of the key points of clean architecture is that low level layers should be platform agnostic. As a result, the domain and data layers can be plugged into a kotlin multiplatform project for example, and it will run just fine because we don't depend on the android framework.
+These modules are full of kotlin codes except ui modules. The reason being that the low level layers need to be independent of the Android framework. One of the key points of clean architecture is that low level layers should be platform agnostic. As a result, the domain and data layers can be plugged into a kotlin multiplatform project for example, and it will run just fine because we don't depend on the android framework.
 The remote layers is an implementation details that can be provided in any form (Firebase, GraphQl server, REST, ROOM, SQLDelight, etc) as long as it conforms to the business rules / contracts defined in the data layer which in turn also conforms to contracts defined in domain.
 
 For dependency injection and asynchronous programming, the project uses Dagger Hilt and Coroutines. Dagger Hilt is a fine abstraction over the vanilla dagger boilerplate, and is easy to setup. Coroutines brings kotlin's expressibility and conciseness to asynchronous programming, along with a fine suite of operators that make it a robust solution. 

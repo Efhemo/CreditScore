@@ -1,9 +1,9 @@
 package com.efhem.creditscore.ui.home
 
-import com.efhem.creditscore.domain.executor.TestPostExecutionThread
-import com.efhem.creditscore.domain.mapper.CreditScoreEntityMapper
-import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
+import com.efhem.creditscore.executor.TestPostExecutionThread
 import com.efhem.creditscore.fakes.FakeCreditScoreRepository
+import com.efhem.creditscore.domain.usecase.GetCreditScoreUseCase
+import com.efhem.creditscore.ui.mappers.CreditScoreMapper
 import com.efhem.creditscore.ui.models.ViewState
 import com.efhem.creditscore.utils.MainCoroutineRule
 import com.google.common.truth.Truth.assertThat
@@ -17,7 +17,7 @@ import org.junit.Test
 class HomeViewModelTest {
 
     private lateinit var homeViewModel: HomeViewModel
-    private val creditRemoteMapper: CreditScoreEntityMapper = CreditScoreEntityMapper()
+    private val creditScoreMapper: CreditScoreMapper = CreditScoreMapper()
 
     private val getCreditScoreUseCase = GetCreditScoreUseCase(FakeCreditScoreRepository(), TestPostExecutionThread())
 
@@ -26,7 +26,7 @@ class HomeViewModelTest {
 
     @Before
     fun setUp() {
-        homeViewModel = HomeViewModel(getCreditScoreUseCase, creditRemoteMapper)
+        homeViewModel = HomeViewModel(getCreditScoreUseCase, creditScoreMapper)
     }
 
     @Test

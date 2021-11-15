@@ -1,17 +1,12 @@
-package com.efhem.creditscore.utils
+package com.efhem.creditscore.data.utils
 
 
 import com.efhem.creditscore.data.ApiService
 import com.google.common.io.Resources
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.test.TestCoroutineScope
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.Assert
-import org.junit.function.ThrowingRunnable
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
@@ -39,15 +34,3 @@ internal fun makeTestApiService(mockWebServer: MockWebServer): ApiService = Retr
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
     .create(ApiService::class.java)
-
-
-inline fun <reified T : Throwable> TestCoroutineScope.trowException(
-    crossinline runnable: suspend () -> Unit
-): T {
-    val throwingRunnable = ThrowingRunnable {
-        val job: Deferred<Unit> = async { runnable() }
-        job.getCompletionExceptionOrNull()?.run { throw this }
-        job.cancel()
-    }
-    return Assert.assertThrows(T::class.java, throwingRunnable)
-}
